@@ -1,3 +1,4 @@
+# Programación recursiva
 Reglas de la recursión fundamentales
 1. caso base: siempre tiene que haber al menos un caso que se pueda resolver sin recursividad
 2. progresión: toda llamada recursiva debe progresar hacia un caso base
@@ -6,9 +7,7 @@ algo que puede llegar a ser difícil de trazar mentalmente.
 4. Regla del interés compuesto: nunca duplique el trabajo resolviendo la 
 misma instancia de un problema en llamadas recursivas separadas.
 
-La rutina de preparación comprueba la validez de la base antes de llamar a
-
-La función recursiva, evitando comprobarlo en la propia función, algo que sería poco eficiente.
+La rutina de preparación comprueba la validez de la base antes de llamar a la función recursiva, evitando comprobarlo en la propia función, algo que sería poco eficiente.
 
 La recursión siempre puede ser eliminada utilizando una pila. Esto puede ser necesario para ahorrar espacio.
 

@@ -35,7 +35,7 @@ Para resolver una recurrencia hanbrá que asignar una expresión no recursiva pa
 - Reducción mediante sustracción
 ![alt text](substraction_order.png)
 - Reducción mediante división
-![alt text](image.png)
+![alt text](product_order.png)
 
 
 

@@ -6,13 +6,13 @@ UD1: Conceptos Fundamentales de Algoritmia y Estructuras de Datos
   - [x] Vídeos equipo docente ([código](./VideoTema01/))
   - [x] Vídeos Makigas
   - [x] [Ejercicios tema](./EjerciciosTema01/)
-* Programación recursiva:
+* Programación recursiva ([apuntes](ApuntesTema02.md)):
   - [x] Libro 7[1, 4]
   - [x] Vídeos equipo docente
   - [x] [Ejercicios tema](./EjerciciosTema02/)
-* Análisis básico de algoritmos:
+* Análisis básico de algoritmos ([apuntes](./ApuntesTema03.md)):
   - [ ] Libro 5
-  - [ ] Vídeos equipo docente
+  - [x] Vídeos equipo docente
   - [ ] Ejercicios tema
 
 

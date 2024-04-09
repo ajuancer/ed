@@ -8,13 +8,13 @@ public interface ListIPIF<E> extends SequenceIF<E> {
 	
 	/** Avanza la posición del puntero una unidad
 	 * 
-	 * @pre 1 <= getPointerPosition() + 1 <= size() + 1
+	 * @pre 0 <= getPointerPosition() < size() 
 	 * 															**/
 	public void movePointerFowards();
 	
 	/** Retrocede la posición del puntero una unidad
 	 * 
-	 * @pre 0 <= getPointerPosition() - 1 <= size() + 1
+	 * @pre 0 < getPointerPosition() <= size()
 	 * 															**/
 	public void movePointerBackwards();
 	
@@ -32,13 +32,13 @@ public interface ListIPIF<E> extends SequenceIF<E> {
 	
 	/** Devuelve el elemento en la posición del puntero
 	 * 
-	 * @pre Existe un elemento en la posición del puntero
+	 * @pre 0 <= getPointerPosition() < size()
 	 * 															**/
 	public E get ();
 	
 	/** Fija el elemento en la posición del puntero
 	 * 
-	 * @pre Existe un elemento en la posición del puntero
+	 * @pre 0 <= getPointerPosition() < size()
 	 * 															**/
 	public void set (E e);
 	
@@ -50,8 +50,7 @@ public interface ListIPIF<E> extends SequenceIF<E> {
 	
 	/** Remove the element in the pointed position 
 	 * 
-	 * @pre Existe un elemento en la posición del puntero
-	 * @post No existe un elemento en la posición del puntero
+	 * @pre 0 <= getPointerPosition() < size()
 	 * 															**/
 	public void remove ();
 }

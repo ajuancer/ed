@@ -7,6 +7,9 @@ Si nos centramos en el tiempo, nos podemos fijar en el caso peor (el caso en el 
 El caso peor fija una cota superior, es decir coste asintótico temporal peor.
 El caso asintótico temporal peor se estudia con métricas de análisis
 
+**La notación de Landau oculta las constantes multiplicativas**
+**El primer paso debe ser definir el tamaño del problema**
+
 # Métricas de análisis y órdenes  de complejidad
 La notación de Landau permite señalar el término dominante en una función. 
 - O mayúscula, O grade, orden de n se defone como conjunto {g / g no crece más que f}.

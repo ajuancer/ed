@@ -3,7 +3,7 @@ public interface ListMSIF<E> extends SequenceMSIF<E>{
 	
 	/** Inserta un elemento en la lista
 	 * 	
-	 * @pre 0 <= pos <= size() + 1 <= maxSize()
+	 * @pre 1 <= pos <= size() + 1 <= getMaxSize()
 	 * @param element Elemento a añadir
 	 * @param pos Posición en la que añadir el elemento
 	 */

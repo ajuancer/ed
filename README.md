@@ -13,7 +13,7 @@ UD1: Conceptos Fundamentales de Algoritmia y Estructuras de Datos
 * Análisis básico de algoritmos ([apuntes](./ApuntesTema03.md)):
   - [ ] Libro 5
   - [x] Vídeos equipo docente
-  - [ ] Ejercicios tema
+  - [x] [Ejercicios tema](./EjerciciosTema03/)
 
 
 UD2: Implementación de Estructuras de Datos

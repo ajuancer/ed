@@ -77,4 +77,117 @@ Clear llama a la función de sequence, que realiza una operación de asignación
 		return false;							// O(1)
 	}
 ```
-Las operaciones básicas de comparación son de coste constante. La sentencia while será de orden v(n)*max{C_e, C_s}: n*max{O(1), O(1)} = O(n). La suma de órdenes de la función sería la orden mayor, O(n).
+Las operaciones básicas de comparación son de coste constante. La sentencia while será de orden `v(n)*max{C_e, C_s}`: `n*max{O(1), O(1)} = O(n)`. La suma de órdenes de la función sería el orden mayor, O(n).
+
+# Pregunta 3
+```java
+	public List () { super (); }
+```
+
+El coste sería O(1) al llamar al constructor de `Sequence`, ya visto en la pregunta 2.
+
+```java
+	public List (List<E> s) { super(s); }
+```
+
+El coste sería O(n) al llamar al constructor con copia de `Sequence`, ya visto en la pregunta 2.
+
+```java
+	public E get (int pos) {
+		NodeSequence node = getNode(pos);
+		return node.getValue();
+	}
+```
+
+El coste de get es la suma del orden de return, que es O(1), ya calculado en la pregunta 1, y del orden de `NodeSequence node = getNode(pos)`. El coste será, al ser una asignación, el coste de `getNode(pos)`. Esta función es:
+
+```java
+	private NodeSequence getNode(int i) {
+		NodeSequence node = firstNode;
+		for (int aux = 1; aux < i; aux++) {
+			node = node.getNext();
+		}
+		return node;
+	}
+```
+Que itera hasta que aux alcanza el valor de i. Si definimos el tamaño del problema como `n=número de elementos de la secuencia`, el orden de for será de O(n)*max{O(1), O(1)}, es decir, O(n). Por tanto, el coste de `get()` será O(n).
+
+```java
+	public void set (int pos, E e) {
+		NodeSequence node = getNode(pos);
+		node.setValue(e);
+	}
+```
+
+La función set tiene orden la suma de getNode(pos) y node.setValue(e), el orden de getNode() es O(n) siguiendo el mismo razonamiento que en la función anterior get. El coste de setValue() es constante, y por tanto el orden de set: `O(n) + O(1) = O(n)`
+
+```java
+	public void insert (int pos, E e) {
+		NodeSequence newNode = new NodeSequence(e); // O(1)
+		if (pos==1) {								// O(1)
+			newNode.setNext(this.firstNode);		// O(1)
+			this.firstNode = newNode;				// O(1)
+		} else {
+			NodeSequence prevNode = getNode(pos-1);	// O(n)
+			NodeSequence nextNode = previousNode.getNext(); //O(1)
+			previousNode.setNext(newNode);	// O(1)
+			newNode.setNext(nextNode);		// O(1)
+		}
+		size++;								// O(1)
+	}
+```
+
+La función insert contiene una operación constante y una sentencia if, cuya condición tiene coste de orden constante, las operaciones del caso verdadero O(1) y del caso falso O(n). El máximo de estos tres es O(n), y la suma de O(1)+O(n) es O(n), que será el coste asintótico mayor de insert.
+
+# Pregunta 4
+Requiere la implementación de pilas que se dará en el siguiente tema
+## apartado b
+
+# Pregunta 5
+La implementación sin utilizar un iterador podría ser:
+
+```java
+	public List<E> invierte(List<E> l) {
+		if (l.size < 2) {
+			return l;
+		}
+		List<E> invertedList = new List();
+		for (int i=l.size-1; i>=0; i--) {
+			invertedList.insert(l.size-i, l.get(i));
+		}
+		return invertedList;
+	}
+```
+
+Tanto la condición como las operaciones en caso verdadero del primer if else tienen un coste constante al ser independiente del tamaño del problema (número de elementos de la lista). La siguiente línea también es de coste constante, de igual manera que el return de la última línea. Sólo falta por analizar la estructura for:
+- La iniciación es de coste constante al ser l.size independiente del tamaño del problema
+- Tanto la comparación como la operación i-- son de coste constante.
+- La función insert tiene un coste O(n) (razonado el pregunta 3), y dentro de esta función se llama a l.size(), de coste constante, y l.get(), de coste O(n) (también razonado en la pregunta 3). Por tanto, el coste total del bucle es n*O(n), es decir, O(n^2).
+Puesto que la función tiene como coste O(1)+O(1)+O(n^2)+O(1), el orden de la función invierte es O(n^2).
+
+La implementación que utiliza un iterador podría ser:
+```java
+	public List<E> invierte(List<E> l) {
+		if (l.size < 2) {
+			return l;
+		}
+		List<E> invertedList = new NodeSequence();
+		NodeSequence iterator = new SequenceIterator(l);
+		int index = l.size -1;
+		while (iterator.hasNext()) {
+			invertedList.insert(index--, iterator.getNext());
+		}
+		return invertedList;
+	}
+```
+
+El coste de la estructura ifelse es constante al ser l.size() no dependiente del tamaño del problema. 
+
+Las tres siguientes líneas, y la última, tampoco dependen del tamaño del problema y su coste asintótico temporal mayor es O(1). 
+
+La estructura while se ejecutará hasta que se llega al último elemento de la lista (v(n)=n). hasNext() y getNext() son de coste constante, pero insert es de coste O(n), por lo que el coste de la estructura while es n*O(n)=O(n^2).
+
+El coste de la implementación es O(n^2).
+
+# Pregunta 6
+

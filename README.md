@@ -19,9 +19,9 @@ UD1: Conceptos Fundamentales de Algoritmia y Estructuras de Datos
 UD2: Implementación de Estructuras de Datos
 * Listas
   - [x] Libro 17[1, 4] ([código](./Capitulo17/))
-  - [ ] Vídeos equipo docente
+  - [x] Vídeos equipo docente ([código](./VideoTema04/))
   - [ ] Vídeos Makigas
-  - [ ] Ejercicios tema
+  - [x] Ejercicios tema ([código](./EjerciciosTema04))
 * Pilas y colas
   - [x] Libro 16[1, 3], 5 ([código](./Capitulo16/))
   - [ ] Vídeos equipo docente

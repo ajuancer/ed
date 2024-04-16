@@ -1,5 +1,5 @@
-
-public class SequenceMS<E> extends Sequence<E> implements SequenceMSIF<E> {
+package EjerciciosTema04.src;
+public class PrevSequenceMS<E> extends PrevSequence<E> implements SequenceMSIF<E> {
 	
 	int maxSize = 10;
 

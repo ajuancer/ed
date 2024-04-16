@@ -21,7 +21,7 @@ UD2: Implementación de Estructuras de Datos
   - [x] Libro 17[1, 4] ([código](./Capitulo17/))
   - [x] Vídeos equipo docente ([código](./VideoTema04/))
   - [ ] Vídeos Makigas
-  - [x] Ejercicios tema ([código](./EjerciciosTema04))
+  - [x] Ejercicios tema ([código](./EjerciciosTema04)) (pendiente q3.7, q3.8, q3.9 y q3.10)
 * Pilas y colas
   - [x] Libro 16[1, 3], 5 ([código](./Capitulo16/))
   - [ ] Vídeos equipo docente

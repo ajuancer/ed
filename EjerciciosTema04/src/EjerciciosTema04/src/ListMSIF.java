@@ -1,4 +1,4 @@
-
+package EjerciciosTema04.src;
 public interface ListMSIF<E> extends SequenceMSIF<E>{
 	
 	/** Inserta un elemento en la lista

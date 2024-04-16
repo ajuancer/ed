@@ -140,23 +140,41 @@ La función set tiene orden la suma de getNode(pos) y node.setValue(e), el orden
 La función insert contiene una operación constante y una sentencia if, cuya condición tiene coste de orden constante, las operaciones del caso verdadero O(1) y del caso falso O(n). El máximo de estos tres es O(n), y la suma de O(1)+O(n) es O(n), que será el coste asintótico mayor de insert.
 
 # Pregunta 4
-Requiere la implementación de pilas que se dará en el siguiente tema
-## apartado b
+En primer lugar definimos el tamaño del problema como `n=número de elementos de la lista`.
+
+La función getPointerPosition() es de orden constante al ser independiente del tamaño del problema, solo devuelve el atributo size del stack `pointer` y realiza operaciones básicas con dicho resultado.
+
+Las funciones que comprueban si el puntero se puede desplazar (canPointerMoveFowards y canPointerMoveBackwards) son de orden constante, puesto que comparan un valor con el resultado de getPointerPosition(). Por tanto, O(1).
+
+Las funciones movePointerBackwards() y movePointerFowards() son de coste constante puesto que:
+- Llaman a la función canPointerMoveBackwards o canPointerMoveFowards(), de O(1) ya calculado
+- Llaman a las funciones getTop(), push() y pop(), de orden constante todas.
+
+La función resetPointerPosition() utiliza las funciones analizadas anteriormente, por lo que su coste asintótico temporal mayor es la suma de órdenes constantes, es decir, órden constante O(1).
+Lo mismo ocurre con la función setPointerPosition(), que usa las funciones movePointerFowards(), movePointerBackwards() y getPointerPosition() de orden constante.
+
+Los dos constructores son de orden constante, en primer caso es trivial que pertenence a O(1), en el segundo caso, por copia, resetPointerPosition() es de O(1), por lo que el constructor también lo es.
+
+Finalmente quedan por analizar las cuatro funciones de las listas, get, insert, set y remove, que se basan en las operaciones de pilas ya analizadas y por tanto son de orden constante.
+
+Como resultado, podemos decir que todas las operaciones son de orden constante.
+
 
 # Pregunta 5
 La implementación sin utilizar un iterador podría ser:
 
 ```java
-	public List<E> invierte(List<E> l) {
-		if (l.size < 2) {
-			return l;
-		}
-		List<E> invertedList = new List();
-		for (int i=l.size-1; i>=0; i--) {
-			invertedList.insert(l.size-i, l.get(i));
-		}
-		return invertedList;
+public List<E> invierte1(List<E> l) {
+	if (l.size < 2) {
+		return l;
 	}
+	
+	List<E> invertedList = new List<E>();
+	for (int i=l.size-1; i>=0; i--) {
+		invertedList.insert(l.size-i, l.get(i));
+	}
+	return invertedList;
+}
 ```
 
 Tanto la condición como las operaciones en caso verdadero del primer if else tienen un coste constante al ser independiente del tamaño del problema (número de elementos de la lista). La siguiente línea también es de coste constante, de igual manera que el return de la última línea. Sólo falta por analizar la estructura for:
@@ -167,18 +185,19 @@ Puesto que la función tiene como coste O(1)+O(1)+O(n^2)+O(1), el orden de la fu
 
 La implementación que utiliza un iterador podría ser:
 ```java
-	public List<E> invierte(List<E> l) {
-		if (l.size < 2) {
-			return l;
-		}
-		List<E> invertedList = new NodeSequence();
-		NodeSequence iterator = new SequenceIterator(l);
-		int index = l.size -1;
-		while (iterator.hasNext()) {
-			invertedList.insert(index--, iterator.getNext());
-		}
-		return invertedList;
+public List<E> invierte2(List<E> l) {
+	if (l.size < 2) {
+		return l;
 	}
+	
+	List<E> invertedList = new List<E>();
+	IteratorIF<E> iterator = l.iterator();
+	int index = l.size -1;
+	while (iterator.hasNext()) {
+		invertedList.insert(index--, iterator.getNext());
+	}
+	return invertedList;
+}
 ```
 
 El coste de la estructura ifelse es constante al ser l.size() no dependiente del tamaño del problema. 
@@ -188,6 +207,4 @@ Las tres siguientes líneas, y la última, tampoco dependen del tamaño del prob
 La estructura while se ejecutará hasta que se llega al último elemento de la lista (v(n)=n). hasNext() y getNext() son de coste constante, pero insert es de coste O(n), por lo que el coste de la estructura while es n*O(n)=O(n^2).
 
 El coste de la implementación es O(n^2).
-
-# Pregunta 6
 

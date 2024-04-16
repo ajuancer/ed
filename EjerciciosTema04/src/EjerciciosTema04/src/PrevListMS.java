@@ -1,6 +1,6 @@
-import Sequence.NodeSequence;
+package EjerciciosTema04.src;
 
-public class ListMS<E> extends SequenceMS<E> implements ListMSIF<E> {
+public class PrevListMS<E> extends PrevSequenceMS<E> implements ListMSIF<E> {
 	
 	private static final Exception IndexOutOfBounds = null;
 

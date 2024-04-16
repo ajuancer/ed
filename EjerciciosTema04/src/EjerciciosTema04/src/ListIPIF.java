@@ -1,22 +1,26 @@
+package EjerciciosTema04.src;
 
 public interface ListIPIF<E> extends SequenceIF<E> {
 	/** Fija la posición del puntero en la posicón n
+	 * @throws Exception 
 	 * 
 	 * @pre 0 <= n <= size()
 	 * 															**/
-	public void setPointerPosition(int n);
+	public void setPointerPosition(int n) throws Exception;
 	
 	/** Avanza la posición del puntero una unidad
+	 * @throws Exception 
 	 * 
 	 * @pre 0 <= getPointerPosition() < size() 
 	 * 															**/
-	public void movePointerFowards();
+	public void movePointerFowards() throws Exception;
 	
 	/** Retrocede la posición del puntero una unidad
+	 * @throws Exception 
 	 * 
 	 * @pre 0 < getPointerPosition() <= size()
 	 * 															**/
-	public void movePointerBackwards();
+	public void movePointerBackwards() throws Exception;
 	
 	/** Fija la posición del puntero a la posición 0
 	 * 

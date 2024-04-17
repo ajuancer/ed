@@ -75,6 +75,7 @@ public class List<E> extends Sequence<E> implements ListIF<E> {
 			if (increment && decrement) {
 				return false;
 			}
+			prev = current;
 		}
 		return true;
 	}
@@ -104,5 +105,72 @@ public class List<E> extends Sequence<E> implements ListIF<E> {
 			invertedList.insert(index--, iterator.getNext());
 		}
 		return invertedList;
+	}
+	
+	/*
+	 * Busca rellanos en una lista no ordenada
+	 * @pre k > 0
+	 * @param l: Lista en la que buscar rellanos
+	 * @param k: Longitud del rellano a buscar
+	 * @return true si encuentra un rellano de longitud l >= k
+	 */
+	@SuppressWarnings("hiding")
+	public <E extends Comparable<? super E>>boolean existeRellano(List<E> l, int k) {
+		if (l.isEmpty()) {
+			return false;
+		}
+		
+		int rellanoCounter = 0;
+		IteratorIF<E> iterator = l.iterator();
+		E prev = iterator.getNext();
+		while (iterator.hasNext() ) {
+			E current = iterator.getNext();
+			if (prev.equals(current)) {
+				rellanoCounter++;
+			} else {
+				rellanoCounter = 0; // reset counter
+			}
+			
+			// Si este if estuviera dentro del else 
+			// anterior entonces se devolvería
+			// true sii l = k
+			if (rellanoCounter == k) {
+				return true;
+			}
+			prev = current;
+		}
+		
+		return false;
+	}
+	
+	/*
+	 * Busca rellanos en una lista ordenada
+	 * @pre k > 0
+	 * @param l: Lista en la que buscar rellanos
+	 * @param k: Longitud del rellano a buscar
+	 * @return true si encuentra un rellano de longitud l >= k
+	 */
+	@SuppressWarnings("hiding")
+	public <E extends Comparable<? super E>> boolean existeRellanoOrdenado(List<E> l, int k) {
+		if (l.isEmpty()) {
+			return false;
+		}
+		
+		// Comienza a buscar segmentos
+		// desde la posición 0 hasta
+		// posición k-1
+		for(int i = 0; i < k; i++) {
+			// Divide la lista en segmentos
+			// de longitud k
+			for(int j = i; j < l.size() - k; j += k) {
+				// Si coinciden los extremos, los
+				// elementos intermedios también
+				if (l.get(j).equals(l.get(j+k-1))) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 }

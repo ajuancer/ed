@@ -1,0 +1,3 @@
+Acceso por un único punto (cima). Se organizan inversamente a su inserción (política LIFO). No se puede modificar la cima (se deberá borrar e insertar). El recorrido es destructivo. Las operaciones son apilar desapilar y consultar.
+
+Acceso por dos puntos, insercción y borrado. Se organizan directamente a su inserción (política FIFO). No se puede modificar sis elementos accesibles (habrá que copiar y destruir todo el contenido). Recorrido destructivo, con operaciones encolar, desencolar, y consultar el primero.

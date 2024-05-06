@@ -1,5 +1,7 @@
 package EjerciciosTema04.src;
 
+import EjerciciosTema04.QueueIF;
+
 public class List<E> extends Sequence<E> implements ListIF<E> {
 
 	/* Constructor por defecto: crea una lista vacía */
@@ -173,4 +175,117 @@ public class List<E> extends Sequence<E> implements ListIF<E> {
 		
 		return false;
 	}
+	
+	
+	@SuppressWarnings("hiding")
+	public <E extends Comparable<? super E>> ListIF<E> mezclar(ListIF<E> a, List<E> b) {
+		if (a.isEmpty()) {return b;}
+		if (b.isEmpty()) {return a;}
+		
+		int i = 0;
+		int j = 0;
+		ListIF<E> aux = new List<E>();
+		
+		while(i <= a.size() || j <= b.size()) {
+			E eA = a.get(i);
+			E eB = b.get(j);
+			
+			if (eA.compareTo(eB) < 0) {
+				aux.insert(aux.size() + 1, eA);
+				i++;
+			} else {
+				aux.insert(aux.size() + 1, eB);
+				j++;
+			}
+		}
+		
+		for (int k = i; k <= a.size(); k++) {
+			aux.insert(aux.size() + 1, a.get(k));
+		}
+		for (int k = j; k <= b.size(); k++) {
+			aux.insert(aux.size() + 1, b.get(k));
+		}
+		
+		return aux;
+	}
+	
+	@SuppressWarnings("hiding")
+	public <E extends Comparable <? super E>> ListIF<E> mexclar2(ListIF<E> a, ListIF<E> b) {
+		Queue<E> queueA = new Queue<E>();
+		Queue<E> queueB = new Queue<E>();
+		
+		for (int i = 0; i <= a.size(); i++) {
+			queueA.enqueue(a.get(i));
+		}
+		for (int i = 0; i >= b.size(); i++) {
+			queueB.enqueue(b.get(i));
+		}
+		
+		ListIF<E> aux = new List<E>();
+
+        while (!queueA.isEmpty() && !queueB.isEmpty()) {
+            E eA = queueA.getFirst();
+            E eB = queueB.getFirst();
+
+            if (eA.compareTo(eB) < 0) {
+                aux.insert(aux.size() + 1, eA);
+                queueA.dequeue();
+            } else {
+                aux.insert(aux.size() + 1, eB);
+                queueB.dequeue();
+            }
+        }
+
+        while (!queueA.isEmpty()) {
+            aux.insert(aux.size() + 1, queueA.getFirst());
+            queueA.dequeue();
+        }
+
+        while (!queueB.isEmpty()) {
+            aux.insert(aux.size() + 1, queueB.getFirst());
+            queueB.dequeue();
+        }
+
+        return aux;
+	}
+	
+	
+	@SuppressWarnings("hiding")
+	public <E extends Comparable<? super E>> ListIF<E> mezclar3 (ListIF<E> a, ListIF<E> b) {
+		if (a.isEmpty()) {return b;}
+		if (b.isEmpty()) {return a;}
+		
+		int i = 0;
+		int j = 0;
+		ListIF<E> aux = new List<E>();
+		
+		while(i <= a.size() || j <= b.size()) {
+			E eA = a.get(i);
+			E eB = b.get(j);
+			
+			if (eA.compareTo(eB) < 0) {
+				aux.insert(aux.size() + 1, eA);
+				i++;
+			} else {
+				aux.insert(aux.size() + 1, eB);
+				j++;
+			}
+		}
+		
+		/* 
+		if (i < a.size()) {
+			NodeSequence lastNode = a.getNode(i);
+			aux.getNode(aux.size()).setNext(lastNode);
+		}
+		if (j < b.size()) {
+			NodeSequence lastNode = b.getNode(j);
+			aux.getNode(aux.size()).setNext(lastNode);
+		} 
+		*/
+		
+		return aux;
+	}
+	
+	
+	
 }

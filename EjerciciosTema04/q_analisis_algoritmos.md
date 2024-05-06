@@ -208,3 +208,13 @@ La estructura while se ejecutará hasta que se llega al último elemento de la l
 
 El coste de la implementación es O(n^2).
 
+
+# Pregunta 9
+El tamaño del problema n es la longitud de la secuencia.
+El coste asintótico temporal peor para el constructor vacío sigue siendo constante O(1) al llamar al constructor de Sequence y realizar una asignación independiente del tamaño del problema.
+El coste para el constructor por copia sigue siendo O(n) al llamar al constructor por copia de Sequence, de coste O(n), y realizar una asignación de coste independiente del tamaño del problema: O(n)+O(1)=O(nO.
+En cuanto a las dos operaciones especificadas en la interfaz, son de coste constante O(1) al realizar operaciones independientes del tamaño del problema.
+
+# Pregunta 10
+El coste asintótico temporal peor de los métodos públicos es el mismo al de las respectivas funciones de la clase List puesto que las funciones son las mismas a excepción de una primera comparación con el tamaño máximo, operación de coste constante, para confirmar que nunca se supera o se intenta acceder a elementos fuera del tamaño máximo definido al crear la lista con tamaño máximo.
+

@@ -14,8 +14,9 @@ public class StackMS<E> extends SequenceMS<E> implements StackMSIF<E>{
 
 	/* Añade un nuevo elemento a la cima de la pila */
 	public void push(E elem) {
-		NodeSequence newNode = new NodeSequence(elem);
 		if (size() < getMaxSize()) {
+			NodeSequence newNode = new NodeSequence(elem);
+
 			if(!isEmpty()){
 				newNode.setNext(this.firstNode);
 			}

@@ -8,6 +8,28 @@ public class Queue<E> extends Sequence<E> implements QueueIF<E> {
 		this.lastNode = null; /* No hay último nodo */
 	}
 	
+	public Queue(List<E> l) {
+		super(l);
+		
+		if (this.isEmpty()) {
+			this.lastNode = null;
+		} else {
+			NodeSequence node = this.getNode(this.size);
+			this.lastNode = node;
+		}
+	}
+	
+	public Queue(Stack<E> s) {
+		super(s);
+		
+		if (this.isEmpty()) {
+			this.lastNode = null;
+		} else {
+			NodeSequence node = this.getNode(this.size);
+			this.lastNode = node;
+		}
+	}
+	
 	/* Constructor por copia: delega en el constructor por copia *
 	 * de la secuencia                                           */
     public Queue(Queue<E> s) {

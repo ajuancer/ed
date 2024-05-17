@@ -11,6 +11,14 @@ public class Stack<E> extends Sequence<E> implements StackIF<E> {
     public Stack(Stack<E> s) {
     	super(s);
     }
+    
+    public Stack(List<E> l) {
+    	super(l);
+    }
+    
+    public Stack(Queue<E> q) {
+    	super(q);
+    }
 	
 	/* Devuelve el elemento en la cima de la pila */
 	public E getTop() {

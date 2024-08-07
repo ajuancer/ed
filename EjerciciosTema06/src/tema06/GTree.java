@@ -3,10 +3,16 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
 
 	private ListIF<GTreeIF<E>> children; 
 	
+	private int height;
+	
+	private int fanout;
+	
 	/* Constructor por defecto: crea un árbol vacío */
 	public GTree() {
 		super();
 		this.children = new List<GTreeIF<E>>();
+		this.height = 0;
+		this.fanout = 0;
 	}
 
 	public void setRoot(E e) {
@@ -14,6 +20,8 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
 			// Si el arbol estaba vacio su raíz
 			// era null (tamaño 0).
 			updateSizeUpwards(this, 1);
+			height = 1;
+			fanout = 1;
 		}
 		this.root = e;
 	}
@@ -42,10 +50,14 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
 		this.children.insert(pos, e);
 		e.setParent(this);
 		updateSizeUpwards(this, e.size());
+		updateHeightUpwards(this);
+		updateFanOut(this);
 	}
 
 	public void removeChild(int pos) {
 		updateSizeUpwards(this, -this.getChild(pos).size());
+		updateHeightUpwards(this);
+		updateFanOut(this);
 		this.children.remove(pos);
 	}
 	
@@ -57,11 +69,51 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
         }
     }
 	
+	private void updateHeightUpwards(GTree<E> node) {
+		GTree<E> current = node;
+		while (current != null) {
+			int maxHeight = 0;
+			IteratorIF<GTreeIF<E>> iterator = node.children.iterator();
+			
+			while (iterator.hasNext()) {
+				maxHeight = Math.max(maxHeight, iterator.getNext().getHeight() + 1);
+			}
+			
+			if (maxHeight == current.getHeight()) {
+				break;
+			}
+			
+			current.height = maxHeight;
+			current = current.getParent();
+		}
+	}
+	
+	private void updateFanOut(GTree<E> node) {
+		GTree<E> current = node;
+		if (current != null) {
+			int currentFanOut = 0;
+			IteratorIF<GTreeIF<E>> iterator = current.children.iterator();
+            
+			while (iterator.hasNext()) {
+				currentFanOut += iterator.getNext().getFanOut();
+			}
+			
+			current.fanout = currentFanOut;
+			current = current.getParent();
+        }
+	}
+	
+	
+	
 
 	/* Reimplementación/Especialización de algunos métodos de Collection */
 	public int size() {
 		return size;
 	}
+	
+	public int getHeight() { return height; }
+	
+	public int getFanOut() { return fanout; }
 	
 	/* Devuelve el número de nodos del árbol */
 	public int sizeED() {
@@ -104,7 +156,7 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
 	}
 
 	/* Devuelve el fan-out del árbol */
-	public int getFanOut() {
+	public int getFanOutED() {
 		if ( isEmpty() ) { return 0; }
 		int fOut = getNumChildren();
 		IteratorIF<GTreeIF<E>> childIt = this.children.iterator();
@@ -116,7 +168,7 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
 	}
 
 	/* Devuelve la altura del árbol */
-	public int getHeight() {
+	public int getHeightED() {
 		if ( isEmpty() ) { return 0; }
 		int height = 0;
 		IteratorIF<GTreeIF<E>> childIt = this.children.iterator();
@@ -304,11 +356,7 @@ public class GTree<E> extends Tree<E> implements GTreeIF<E> {
 	    }
 	}
 
-	@Override
-	public GTreeIF<E> setParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 }

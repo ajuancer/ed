@@ -25,7 +25,7 @@ public interface GTreeIF<E> extends TreeIF<E> {
      * @return el árbol hijo que ocupa la posición pos.         */
      public GTreeIF<E> getChild (int pos);
      
-     public GTreeIF<E> setParent ();
+     //public GTreeIF<E> setParent ();
 		
     /* Inserta un árbol como hijo en la posición pos.           *
      * @Pre: !isEmpty()                                         *
@@ -42,6 +42,6 @@ public interface GTreeIF<E> extends TreeIF<E> {
      * @Pre 1 <= pos <= getChildren ().size ();                 */
      public void removeChild (int pos);
 
-	public void setParent(GTree<E> t);
+	 public void setParent(GTree<E> t);
        
 }

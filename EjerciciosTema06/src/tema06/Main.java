@@ -45,6 +45,8 @@ public class Main {
         
         
         System.out.println(tree.size());
+        System.out.println(tree.getHeight());
+        System.out.println(tree.getFanOut());
         
         
         

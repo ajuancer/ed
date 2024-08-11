@@ -38,4 +38,26 @@ public class IBSTree extends BTree<Integer> implements IBSTreeIF {
 	    }
 	}
 	
+	/**
+	 * Devuelve una lista de valores que esté en el intervalo [inf, sup]
+	 * @pre !this.isEmpty()
+	 * @param inf Límite inferior
+	 * @param sup Límite superior
+	 * @return Lista con los valores que cumplen las condiciones. Lista vacia si no hay.
+	 */
+	public ListIF<Integer> beetween(int inf, int sup) {
+		IteratorIF<Integer> iterator = this.iterator(BTreeIF.IteratorModes.INORDER);
+		int current = iterator.getNext();
+		ListIF<Integer> res = new List<Integer>();
+		int insertPos = 0;
+		// Al hacer un recorrido inorder, en el momento que un valor 
+		// sea mayor a sup, todos los siguientes también lo serán.
+		while(iterator.hasNext() && current <= sup) {
+			if (current >= inf) {
+				res.insert(++insertPos, current);
+			}
+		}
+		return res;
+	}
+	
 }

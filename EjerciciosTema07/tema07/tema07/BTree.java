@@ -183,5 +183,81 @@ public class BTree<E> extends Tree<E> implements BTreeIF<E> {
 			}
 		}
 	}
+	
+	public BTree(List<BTreeIF<E>> list, BTreeIF.IteratorModes mode) {
+		super();
+		switch (mode) {
+			case BREADTH:
+				break;
+			case INORDER:
+				break;
+			case POSTORDER:
+				BTreeIF<E> t = BTreeFromPostorderList(list, 1, list.size);
+				this.leftChild = t.getLeftChild();
+				this.rightChild = t.getRightChild();
+				this.root = t.getRoot();
+				break;
+			case PREORDER:
+				BTreeIF<E> t1 = BTreeFromPreorderList(list, 1, list.size);
+				this.leftChild = t1.getLeftChild();
+				this.rightChild = t1.getRightChild();
+				this.root = t1.getRoot();
+				break;
+			case RLBREADTH:
+				break;
+			default:
+				break;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private BTreeIF<E> BTreeFromPreorderList(List<BTreeIF<E>> list, Integer start, Integer end) {
+		if (start > end) {
+			return null;
+		}
+		
+		// En preorden se recorre primero el nodo raíz, después el subarbol izq 
+		// y finalmente el subárbol dcho
+		BTreeIF<E> root = list.get(1);
+		
+		// El subárbol izq serán los valores menores a la raíz
+		int i;
+		for (i = start +1; i <= end; i++) {
+			if (((Comparable<E>) list.get(i).getRoot()).compareTo(root.getRoot()) > 0) {
+				break;
+			}
+		}
+		
+		root.setLeftChild(BTreeFromPreorderList(list, start + 1, i - 1));
+		root.setRightChild(BTreeFromPreorderList(list, i, end));
+		
+		return root;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	private BTreeIF<E> BTreeFromPostorderList(List<BTreeIF<E>> list, Integer start, Integer end) {
+		if (start > end) {
+			return null;
+		}
+		
+		// En postorder se recorre primero el subarbol izq, después el dcho y
+		// finalmente el nodo raíz
+		BTreeIF<E> root = list.get(list.size);
+		
+		// El subárbol izq serán los valores menores a la raíz
+		int i;
+		for (i = start; i <= end - 1; i++) {
+			if (((Comparable<E>) list.get(i).getRoot()).compareTo(root.getRoot()) > 0) {
+				break;
+			}
+		}
+		
+		root.setLeftChild(BTreeFromPostorderList(list, start, i - 1));
+		root.setRightChild(BTreeFromPostorderList(list, i, end - 1));
+		
+		return root;
+	}
 
 }
